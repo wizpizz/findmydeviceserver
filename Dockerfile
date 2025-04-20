@@ -16,6 +16,9 @@ COPY backend/ backend/
 COPY user/ user/
 COPY utils/ utils/
 
+# Copy the config.yml file
+COPY config.yml /fmd/config.yml
+
 RUN go build -o /tmp/fmd main.go
 
 
