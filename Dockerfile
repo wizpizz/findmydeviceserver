@@ -16,9 +16,6 @@ COPY backend/ backend/
 COPY user/ user/
 COPY utils/ utils/
 
-# Copy the config.yml file
-COPY config.yml /fmd/config.yml
-
 RUN go build -o /tmp/fmd main.go
 
 
@@ -37,6 +34,11 @@ RUN chown -R fmd-user:fmd-user /fmd/
 
 USER fmd-user
 WORKDIR /fmd
+
+# Copy the config.yml file
+COPY config.yml /fmd/config.yml
+# Ensure the config file is owned by the correct user
+RUN chown fmd-user:fmd-user /fmd/config.yml
 
 EXPOSE 8080/tcp
 EXPOSE 8443/tcp
