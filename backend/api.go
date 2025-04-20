@@ -2,6 +2,7 @@ package backend
 
 import "net/http"
 import "os"
+import "github.com/rs/zerolog/log"
 
 var remoteIpHeaderName string = ""
 
