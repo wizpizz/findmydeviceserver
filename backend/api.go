@@ -33,15 +33,18 @@ func buildServeMux(webDir string, config config) *http.ServeMux {
 	remoteIpHeaderName = config.RemoteIpHeader
 
 	if config.RegistrationToken == "env" {
+		log.Info().Msg("RegistrationToken is set to env")
 		envToken := os.Getenv("REGISTRATION_TOKEN")
 		if envToken != "" {
+			log.Info().Msgf("envToken: %s", envToken)
 			config.RegistrationToken = envToken
 		} else {
+			log.Info().Msg("envToken is empty")
 			config.RegistrationToken = ""
 		}
 	}
 
-	mainDeviceHandler := mainDeviceHandler{createDeviceHandler{config.RegistrationToken}}
+	mainDeviceHandler := mainDeviceHandler{createDeviceHandler{envToken}}
 
 	apiV1Mux := http.NewServeMux()
 	apiV1Mux.HandleFunc("/command", mainCommand)
