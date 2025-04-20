@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for findmydeviceserver on 2025-04-20T23:00:40+02:00
+# fly.toml app configuration file generated for findmydeviceserver on 2025-04-20T22:42:22Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -20,7 +20,4 @@ primary_region = 'fra'
   memory = '256mb'
   cpu_kind = 'shared'
   cpus = 1
-
-[[mounts]]
-source = "fmd_data"
-destination = "/fmd/db/"
+  memory_mb = 256
