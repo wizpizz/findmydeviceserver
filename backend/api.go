@@ -37,14 +37,16 @@ func buildServeMux(webDir string, config config) *http.ServeMux {
 	log.Info().Msgf("config.RegistrationToken: %s", config.RegistrationToken)
 	if config.RegistrationToken == "env" {
 		log.Info().Msg("RegistrationToken is set to env")
-		envToken := os.Getenv("REGISTRATION_TOKEN")
+		envToken = os.Getenv("REGISTRATION_TOKEN")
 		if envToken != "" {
 			log.Info().Msgf("envToken: %s", envToken)
 			config.RegistrationToken = envToken
 		} else {
-			log.Info().Msg("envToken is empty")
-			config.RegistrationToken = ""
+			log.Info().Msg("REGISTRATION_TOKEN is not set")
 		}
+	} else {
+		log.Info().Msgf("RegistrationToken is set to %s", config.RegistrationToken)
+		envToken = config.RegistrationToken
 	}
 
 	mainDeviceHandler := mainDeviceHandler{createDeviceHandler{envToken}}
