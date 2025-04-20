@@ -460,6 +460,9 @@ func (h createDeviceHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Info().Msgf("RegistrationToken: %s", h.RegistrationToken)
+	log.Info().Msgf("reg.RegistrationToken: %s", reg.RegistrationToken)
+
 	if h.RegistrationToken != "" && h.RegistrationToken != reg.RegistrationToken {
 		log.Error().Msg("invalid RegistrationToken")
 		http.Error(w, "Registration Token not valid", http.StatusUnauthorized)
