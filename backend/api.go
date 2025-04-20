@@ -32,6 +32,8 @@ func buildServeMux(webDir string, config config) *http.ServeMux {
 	// Workaround: cache value in global field to avoid needing to pass down the config into the API code
 	remoteIpHeaderName = config.RemoteIpHeader
 
+	var envToken string
+	log.Info().Msgf("config.RegistrationToken: %s", config.RegistrationToken)
 	if config.RegistrationToken == "env" {
 		log.Info().Msg("RegistrationToken is set to env")
 		envToken := os.Getenv("REGISTRATION_TOKEN")
