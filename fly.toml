@@ -17,7 +17,10 @@ primary_region = 'fra'
   processes = ['app']
 
 [[vm]]
-  memory = '256mb'
   cpu_kind = 'shared'
   cpus = 1
   memory_mb = 256
+
+[[mounts]]
+source = "fmd_data"
+destination = "/fmd/db/"
