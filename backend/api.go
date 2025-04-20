@@ -1,6 +1,7 @@
 package backend
 
 import "net/http"
+import "os"
 
 var remoteIpHeaderName string = ""
 
@@ -30,6 +31,15 @@ func securityHeadersMiddleware(next http.Handler) http.Handler {
 func buildServeMux(webDir string, config config) *http.ServeMux {
 	// Workaround: cache value in global field to avoid needing to pass down the config into the API code
 	remoteIpHeaderName = config.RemoteIpHeader
+
+	if config.RegistrationToken == "env" {
+		envToken := os.Getenv("REGISTRATION_TOKEN")
+		if envToken != "" {
+			config.RegistrationToken = envToken
+		} else {
+			config.RegistrationToken = ""
+		}
+	}
 
 	mainDeviceHandler := mainDeviceHandler{createDeviceHandler{config.RegistrationToken}}
 

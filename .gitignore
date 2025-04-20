@@ -5,7 +5,7 @@
 # FMD Server config
 config.json
 config.yaml
-config.yml
+# config.yml
 
 # binaries
 fmdserver
