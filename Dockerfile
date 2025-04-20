@@ -37,8 +37,6 @@ WORKDIR /fmd
 
 # Copy the config.yml file
 COPY config.yml /fmd/config.yml
-# Ensure the config file is owned by the correct user
-RUN chown fmd-user:fmd-user /fmd/config.yml
 
 EXPOSE 8080/tcp
 EXPOSE 8443/tcp
